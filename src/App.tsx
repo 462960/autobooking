@@ -1,24 +1,21 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useContext, useEffect } from "react";
 import "./App.scss";
+import { StoreContext } from "./utils/store";
+
+import TopBar from "./components/TopBar";
 
 function App() {
+  const store = useContext(StoreContext);
+  useEffect(() => {
+    // store.getServices();
+    // store.getBrands();
+    // store.getStyles();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <TopBar />
+      Good!
     </div>
   );
 }
