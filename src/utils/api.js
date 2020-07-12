@@ -28,3 +28,16 @@ export async function styles() {
     console.error(error);
   }
 }
+
+export async function path() {
+  try {
+    const res = await axios.get(`${URL}/parse_link`, {
+      service_slug: "Nod",
+      brand_slug: "Prod",
+      style_slug: "Dod",
+    });
+    return res.status;
+  } catch (error) {
+    console.error(error);
+  }
+}

@@ -16,9 +16,10 @@ const useStyles = makeStyles({
 interface Props {
   label: string;
   list: any;
+  getChosen: (x: string) => void;
 }
 
-const DropDown: FC<Props> = ({ label, list }) => {
+const DropDown: FC<Props> = ({ label, list, getChosen }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState<string[]>([]);
   const [selected, setSelected] = React.useState<string[]>([]);
@@ -27,13 +28,9 @@ const DropDown: FC<Props> = ({ label, list }) => {
     setExpanded(nodeIds);
   };
 
-  const handleSelect = (e: React.ChangeEvent<{}>, nodeIds: string[]) => {
+  const handleSelect = (e: React.ChangeEvent<{}>, nodeIds: any) => {
     setSelected(nodeIds);
-    console.log(`output: ${nodeIds}`);
-  };
-
-  const handleClick = (e: any) => {
-    // console.log(e.currentTarget.slug);
+    nodeIds !== "1" && getChosen(nodeIds);
   };
 
   const itemsList = list.length > 0 ? list : [];
@@ -48,7 +45,7 @@ const DropDown: FC<Props> = ({ label, list }) => {
       onNodeToggle={handleToggle}
       onNodeSelect={handleSelect}
     >
-      <TreeItem nodeId="1" label={label} onClick={handleClick}>
+      <TreeItem nodeId="1" label={label}>
         {itemsList.map((x: { id: any; label: any; slug: any }) => {
           return <TreeItem key={x.id} label={x.label} nodeId={x.slug} />;
         })}
