@@ -49,9 +49,6 @@ const DropDown: FC<Props> = ({ label, list, getChosen }) => {
         {itemsList.map((x: { id: any; label: any; slug: any }) => {
           return <TreeItem key={x.id} label={x.label} nodeId={x.slug} />;
         })}
-        {/* <TreeItem nodeId="2" label="Calendar" />
-        <TreeItem nodeId="3" label="Chrome" />
-        <TreeItem nodeId="4" label="Webstorm" /> */}
       </TreeItem>
     </TreeView>
   );

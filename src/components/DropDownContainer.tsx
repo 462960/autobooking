@@ -1,25 +1,35 @@
 import React, { useState, useEffect, useContext, FC } from "react";
 import { useObserver } from "mobx-react";
 import { StoreContext } from "../utils/store";
+import history from "../utils/history";
 import DropDown from "./DropDown";
 
 const DropDownContainer: FC = () => {
   const store = useContext(StoreContext);
-  const [chosenService, setChosenService] = useState<any>("");
-  const [chosenBrand, setChosenBrand] = useState<any>("");
-  const [chosenStyle, setChosenStyle] = useState<any>("");
+  const [chosenService, setChosenService] = useState<string>("");
+  const [chosenBrand, setChosenBrand] = useState<string>("");
+  const [chosenStyle, setChosenStyle] = useState<string>("");
+  const [chosenPath, setChosenPath] = useState<string>("");
 
   useEffect(() => {
     const servis = chosenService ? `/s-${chosenService}` : "";
     const brand = chosenBrand ? `/b-${chosenBrand}` : "";
     const style = chosenStyle ? `/st-${chosenStyle}` : "";
     const chosen = `${servis}${brand}${style}`;
-    chosen && localStorage.setItem("chosen", chosen);
+    if (chosen) {
+      setChosenPath(chosen);
+      localStorage.setItem("chosen", chosen);
+    }
   }, [chosenService, chosenBrand, chosenStyle]);
 
-  //   useEffect(() => {
-  //     store.updatePath();
-  //   }, []);
+  useEffect(() => {
+    const savedPath = localStorage.getItem("chosen");
+    savedPath ? history.push(savedPath) : history.push("/");
+  }, []);
+
+  useEffect(() => {
+    chosenPath && history.push(chosenPath);
+  }, [chosenPath]);
 
   return useObserver(() => (
     <div className="drop-downs-container">

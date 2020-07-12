@@ -34,10 +34,6 @@ export const StoreProvider: FC<Props> = ({ children }) => {
       const res = await API.styles();
       store.stylesList = res;
     },
-    updatePath: async () => {
-      const res = await API.path();
-      console.log(`updatePath: ${res}`);
-    },
   }));
 
   return (
