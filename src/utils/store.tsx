@@ -28,11 +28,11 @@ export const StoreProvider: FC<Props> = ({ children }) => {
     },
     getBrands: async () => {
       const res = await API.brands();
-      store.servicesList = res;
+      store.brandsList = res;
     },
     getStyles: async () => {
       const res = await API.styles();
-      store.servicesList = res;
+      store.stylesList = res;
     },
   }));
 

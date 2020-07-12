@@ -14,7 +14,7 @@ export async function services() {
 export async function brands() {
   try {
     const res = await axios.get(`${URL}/brands_terms`);
-    return res.data;
+    return res.data.data;
   } catch (error) {
     console.error(error);
   }
@@ -23,7 +23,7 @@ export async function brands() {
 export async function styles() {
   try {
     const res = await axios.get(`${URL}/styles`);
-    return res.data;
+    return res.data.data;
   } catch (error) {
     console.error(error);
   }
