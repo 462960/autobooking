@@ -18,7 +18,7 @@ function App() {
   return useObserver(() => (
     <div>
       <TopBar />
-      <ChosenContainer parse={store.parseList} />
+      <ChosenContainer parsed={store.parseList} />
       <DropDownContainer />
     </div>
   ));

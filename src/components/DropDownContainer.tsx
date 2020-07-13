@@ -23,12 +23,22 @@ const DropDownContainer: FC = () => {
       setChosenPath(chosen);
       localStorage.setItem("chosen", chosen);
       store.getParse(requestServis, requestBrand, requestStyle);
+      const parseItems: any = [requestServis, requestBrand, requestStyle];
+      localStorage.setItem("parseItems", parseItems);
     }
   }, [chosenService, chosenBrand, chosenStyle]);
 
   useEffect(() => {
     const savedPath = localStorage.getItem("chosen");
     savedPath ? history.push(savedPath) : history.push("/");
+    const savedParse = localStorage.getItem("parseItems");
+    const splitSavedParse = savedParse?.split(",");
+    splitSavedParse &&
+      store.getParse(
+        splitSavedParse[0],
+        splitSavedParse[1],
+        splitSavedParse[2]
+      );
   }, []);
 
   useEffect(() => {

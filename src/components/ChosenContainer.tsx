@@ -3,31 +3,37 @@ import React, { useState, useEffect } from "react";
 import DropDown from "./DropDown";
 
 interface Props {
-  parse: any;
+  parsed: any;
 }
 
-const ChosenContainer: React.FC<Props> = ({ parse }) => {
+const ChosenContainer: React.FC<Props> = ({ parsed }) => {
   const [list, setList] = useState<any>([]);
+  const isListPopulated = list?.length > 0;
   useEffect(() => {
     let res: any = [];
 
-    if (parse !== undefined) {
-      let keys = Object.keys(parse);
+    if (parsed !== undefined) {
+      let keys = Object.keys(parsed);
+      // Each DropDown item should have both id and slug
+      // that's why empty object must be populated
       keys?.forEach((x, i) => {
-        let type = {
-          ...parse[x],
+        let item = {
+          ...parsed[x],
           id: i,
-          slug: parse[x].slug || "",
+          slug: parsed[x].slug || "",
         };
-        res.push(type);
+        res.push(item);
       });
     }
     setList(res);
-  }, [parse]);
+  }, [parsed]);
 
   return (
     <div className="chosen-container">
-      <DropDown label="Your choice" list={list} />
+      <DropDown
+        label={isListPopulated ? "Your choice" : "Select items"}
+        list={list}
+      />
     </div>
   );
 };

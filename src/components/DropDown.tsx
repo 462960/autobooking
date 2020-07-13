@@ -46,9 +46,11 @@ const DropDown: FC<Props> = ({ label, list, getChosen }) => {
       onNodeSelect={handleSelect}
     >
       <TreeItem nodeId="1" label={label}>
-        {itemsList.map((x: { id: any; label: any; slug: any }) => {
-          return <TreeItem key={x.id} label={x.label} nodeId={x.slug} />;
-        })}
+        {itemsList.map(
+          (x: { id: string | number; label: string; slug: string }) => {
+            return <TreeItem key={x.id} label={x.label} nodeId={x.slug} />;
+          }
+        )}
       </TreeItem>
     </TreeView>
   );
