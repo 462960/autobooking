@@ -2,6 +2,14 @@ li {
   list-style: none;
 }
 
+.chosen-container {
+  width: 250px;
+  margin: 10px auto;
+  & > .makeStyles-root-4 {
+    height: auto;
+  }
+}
+
 .drop-downs-container {
   width: 90%;
   min-width: 800px;

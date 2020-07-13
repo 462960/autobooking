@@ -6,9 +6,9 @@ import DropDown from "./DropDown";
 
 const DropDownContainer: FC = () => {
   const store = useContext(StoreContext);
-  const [chosenService, setChosenService] = useState<string>("");
-  const [chosenBrand, setChosenBrand] = useState<string>("");
-  const [chosenStyle, setChosenStyle] = useState<string>("");
+  const [chosenService, setChosenService] = useState<string | undefined>("");
+  const [chosenBrand, setChosenBrand] = useState<string | undefined>("");
+  const [chosenStyle, setChosenStyle] = useState<string | undefined>("");
   const [chosenPath, setChosenPath] = useState<string>("");
 
   useEffect(() => {
@@ -16,9 +16,13 @@ const DropDownContainer: FC = () => {
     const brand = chosenBrand ? `/b-${chosenBrand}` : "";
     const style = chosenStyle ? `/st-${chosenStyle}` : "";
     const chosen = `${servis}${brand}${style}`;
+    const requestServis = chosenService ? `&service_slug=${chosenService}` : "";
+    const requestBrand = chosenBrand ? `&brand_slug=${chosenBrand}` : "";
+    const requestStyle = chosenStyle ? `&style_slug=${chosenStyle}` : "";
     if (chosen) {
       setChosenPath(chosen);
       localStorage.setItem("chosen", chosen);
+      store.getParse(requestServis, requestBrand, requestStyle);
     }
   }, [chosenService, chosenBrand, chosenStyle]);
 

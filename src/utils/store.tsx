@@ -12,9 +12,11 @@ interface Store {
   servicesList: object[];
   brandsList: object[];
   stylesList: object[];
+  parseList: object | undefined;
   getServices: () => void;
   getBrands: () => void;
   getStyles: () => void;
+  getParse: (x?: string, y?: string, z?: string) => void;
 }
 
 export const StoreProvider: FC<Props> = ({ children }) => {
@@ -22,6 +24,7 @@ export const StoreProvider: FC<Props> = ({ children }) => {
     servicesList: [],
     brandsList: [],
     stylesList: [],
+    parseList: undefined,
     getServices: async () => {
       const res = await API.services();
       store.servicesList = res;
@@ -33,6 +36,10 @@ export const StoreProvider: FC<Props> = ({ children }) => {
     getStyles: async () => {
       const res = await API.styles();
       store.stylesList = res;
+    },
+    getParse: async (service, brand, style) => {
+      const res = await API.parse(service, brand, style);
+      store.parseList = res;
     },
   }));
 

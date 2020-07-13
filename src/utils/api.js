@@ -28,3 +28,12 @@ export async function styles() {
     console.error(error);
   }
 }
+
+export async function parse(service, brand, style) {
+  try {
+    const res = await axios.get(`${URL}/parse_link?${service}${brand}${style}`);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+}

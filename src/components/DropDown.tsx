@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 interface Props {
   label: string;
   list: any;
-  getChosen: (x: string) => void;
+  getChosen?: (x?: string) => void;
 }
 
 const DropDown: FC<Props> = ({ label, list, getChosen }) => {
@@ -30,7 +30,7 @@ const DropDown: FC<Props> = ({ label, list, getChosen }) => {
 
   const handleSelect = (e: React.ChangeEvent<{}>, nodeIds: any) => {
     setSelected(nodeIds);
-    nodeIds !== "1" && getChosen(nodeIds);
+    getChosen && nodeIds !== "1" && getChosen(nodeIds);
   };
 
   const itemsList = list.length > 0 ? list : [];
